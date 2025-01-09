@@ -1,22 +1,20 @@
 import java.util.Random;
+import java.util.Vector;
 /**
  * Responsavel pela simulacao.
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
  */
 public class Simulacao {
-    private Veiculo veiculo;
+    private Vector<Veiculo> veiculos;
     private JanelaSimulacao janelaSimulacao;
     private Mapa mapa;
+    private Random rand;
     
     public Simulacao() {
-        Random rand = new Random(12345);
         mapa = new Mapa();
-        int largura = mapa.getLargura();
-        int altura = mapa.getAltura();
-        veiculo = new Veiculo(new Localizacao(rand.nextInt(largura),rand.nextInt(altura)));//Cria um veiculo em uma posicao aleatoria
-        veiculo.setLocalizacaoDestino(new Localizacao(rand.nextInt(largura),rand.nextInt(altura)));//Define a posicao destino aleatoriamente
-        mapa.adicionarItem(veiculo);//Inicializando o mapa com o veículo
-        janelaSimulacao = new JanelaSimulacao(mapa);
+        janelaSimulacao = new JanelaSimulacao(mapa, this);
+        rand = new Random(95462);
+        veiculos = new Vector<Veiculo>();
     }
     
     public void executarSimulacao(int numPassos){
@@ -28,10 +26,20 @@ public class Simulacao {
     }
 
     private void executarUmPasso() {
-        mapa.removerItem(veiculo);
-        veiculo.executarAcao();
-        mapa.adicionarItem(veiculo);
+        for (Veiculo v : veiculos){
+            mapa.removerItem(v);
+            v.executarAcao();
+            mapa.adicionarItem(v);
+        }
+        
         janelaSimulacao.executarAcao();
+    }
+
+    public void adicionarVeiculo(){
+        Veiculo v = new Veiculo(new Localizacao(rand.nextInt(mapa.getLargura()),rand.nextInt(mapa.getAltura())));
+        v.setLocalizacaoDestino(new Localizacao(rand.nextInt(mapa.getLargura()),rand.nextInt(mapa.getAltura())));
+
+        veiculos.add(v);
     }
     
     private void esperar(int milisegundos){
