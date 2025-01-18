@@ -30,9 +30,9 @@ public class JanelaSimulacao extends JFrame implements KeyListener {
      */
     public void executarAcao() {
         visaoMapa.preparePaint();
-        for(int i = 0; i < mapa.getAltura(); i++){
-            for(int j = 0; j < mapa.getLargura(); j++){
-                if(mapa.getItem(i, j) != null){//Se existir algum objeto na posicao (i,j)
+        for (int i = 0; i < mapa.getAltura(); i++) {
+            for (int j = 0; j < mapa.getLargura(); j++) {
+                if (mapa.getItem(i, j) != null) {// Se existir algum objeto na posicao (i,j)
                     Pessoa pessoa = mapa.getItem(i, j);
                     Localizacao localizacao = pessoa.getLocalizacaoAtual();
                     visaoMapa.desenharImagem(localizacao.getX(), localizacao.getY(), pessoa.getImagem());
@@ -48,8 +48,8 @@ public class JanelaSimulacao extends JFrame implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_P){
-            simulacao.adicionarVeiculo();
+        if (e.getKeyCode() == KeyEvent.VK_P) {
+            simulacao.adicionarPessoa();
             System.out.println("Pessoa adicionada");
         }
     }
