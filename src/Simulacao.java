@@ -1,13 +1,11 @@
 import java.util.Random;
-import java.util.Vector;
+import java.util.List;
+import java.util.ArrayList;
 
-/**
- * Responsavel pela simulacao.
- * 
- * @author David J. Barnes and Michael Kolling and Luiz Merschmann
- */
 public class Simulacao {
-    private Vector<Pessoa> pessoas;
+    private List<Pessoa> pessoas;
+    private List<RaioX> filasRaioX;
+    private List<FilaEmbarque> filasEmbarque;
     private JanelaSimulacao janelaSimulacao;
     private Mapa mapa;
     private Random rand;
@@ -16,7 +14,17 @@ public class Simulacao {
         mapa = new Mapa();
         janelaSimulacao = new JanelaSimulacao(mapa, this);
         rand = new Random(98147);
-        pessoas = new Vector<Pessoa>();
+        pessoas = new ArrayList<>();
+        filasRaioX = new ArrayList<>();
+        filasEmbarque = new ArrayList<>();
+
+        // Inicializa filas de raio-x e embarque
+        for (int i = 0; i < 3; i++) {
+            filasEmbarque.add(new FilaEmbarque(10, new Localizacao(rand.nextInt(mapa.getLargura()), rand.nextInt(mapa.getAltura()))));
+        }
+        for (int i = 0; i < 3; i++) {
+            filasRaioX.add(new RaioX(10, new Localizacao(rand.nextInt(mapa.getLargura()), rand.nextInt(mapa.getAltura())), 0, filasEmbarque));
+        }
     }
 
     public void executarSimulacao(int numPassos) {
@@ -33,6 +41,12 @@ public class Simulacao {
             p.executarAcao();
             mapa.adicionarItem(p);
         }
+        for (RaioX raioX : filasRaioX) {
+            raioX.continuarAvaliacao();
+        }
+        for (FilaEmbarque filaEmbarque : filasEmbarque) {
+            filaEmbarque.executarAcao();
+        }
         janelaSimulacao.executarAcao();
     }
 
@@ -41,6 +55,22 @@ public class Simulacao {
         p.setLocalizacaoDestino(new Localizacao(rand.nextInt(mapa.getLargura()), rand.nextInt(mapa.getAltura())));
 
         pessoas.add(p);
+
+        // Adiciona a pessoa em uma fila de raio-x aleatória
+        RaioX filaRaioX = filasRaioX.get(rand.nextInt(filasRaioX.size()));
+        filaRaioX.adicionarPessoa(p);
+    }
+
+    public List<Pessoa> getPessoas() {
+        return pessoas;
+    }
+
+    public List<RaioX> getFilasRaioX() {
+        return filasRaioX;
+    }
+
+    public List<FilaEmbarque> getFilasEmbarque() {
+        return filasEmbarque;
     }
 
     private void esperar(int milisegundos) {
@@ -50,5 +80,4 @@ public class Simulacao {
             System.out.println(e.getMessage());
         }
     }
-
 }
