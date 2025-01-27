@@ -7,24 +7,35 @@ import javax.swing.ImageIcon;
  * Representa os veiculos da simulacao.
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
  */
-public class Pessoa {
+public class Pessoa implements ItemMapa{
     private static Random rand = new Random(96587);
 
     private Localizacao localizacaoAtual;
     private Localizacao localizacaoDestino;
     private Image imagem;
     private int pesoBagagem;
+    private int filaDestino;
 
-    public Pessoa(Localizacao localizacao) {
+    public Pessoa(Localizacao localizacao, int filaDestino) {
         this.localizacaoAtual = localizacao;
         localizacaoDestino = null;
+        this.filaDestino = filaDestino;
 
         String caminho = "Imagens/Pessoas/Pessoa" + (rand.nextInt(6) + 1) + ".png";
         imagem = new ImageIcon(getClass().getResource(caminho)).getImage();
 
-        int pesoBagagem = rand.nextInt(10) + 1;
+        pesoBagagem = rand.nextInt(10) + 1;
     }
 
+    public int getFilaDestino() {
+        return filaDestino;
+    }
+
+    public void setFilaDestino(int filaDestino) {
+        this.filaDestino = filaDestino;
+    }
+
+    @Override
     public Localizacao getLocalizacaoAtual() {
         return localizacaoAtual;
     }
@@ -32,7 +43,8 @@ public class Pessoa {
     public Localizacao getLocalizacaoDestino() {
         return localizacaoDestino;
     }
-    
+
+    @Override
     public Image getImagem(){
         return imagem;
     }
@@ -52,7 +64,11 @@ public class Pessoa {
     public void setPesoBagagem(int pesoBagagem) {
         this.pesoBagagem = pesoBagagem;
     }
-    
+
+    public boolean alcancouDestino(){
+        return localizacaoAtual.equals(localizacaoDestino);
+    }
+
     public void executarAcao(){
         Localizacao destino = getLocalizacaoDestino();
         if(destino != null){

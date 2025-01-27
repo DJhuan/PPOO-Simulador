@@ -1,9 +1,9 @@
 /**
- * Representa um mapa com todos as pessoas que participam da simulacao
+ * Representa um mapa com todos os itens que podem ser desenhados em tela
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
  */
 public class Mapa {
-    private Pessoa[][] pessoas;
+    private ItemMapa[][] itensDoMapa;
     private int largura;
     private int altura;
 
@@ -18,7 +18,7 @@ public class Mapa {
     public Mapa(int largura, int altura) {
         this.largura = largura;
         this.altura = altura;
-        pessoas = new Pessoa[altura][largura];
+        itensDoMapa = new ItemMapa[altura][largura];
     }
 
     /**
@@ -28,21 +28,21 @@ public class Mapa {
         this(LARGURA_PADRAO, ALTURA_PADRAO);
     }
     
-    public void adicionarItem(Pessoa p){
-        pessoas[p.getLocalizacaoAtual().getX()][p.getLocalizacaoAtual().getY()] = p;
+    public void adicionarItem(ItemMapa i){
+        itensDoMapa[i.getLocalizacaoAtual().getX()][i.getLocalizacaoAtual().getY()] = i;
     }
     
-    public void removerItem(Pessoa p){
-        pessoas[p.getLocalizacaoAtual().getX()][p.getLocalizacaoAtual().getY()] = null;
+    public void removerItem(ItemMapa i){
+        itensDoMapa[i.getLocalizacaoAtual().getX()][i.getLocalizacaoAtual().getY()] = null;
     }
     
-    public void atualizarMapa(Pessoa p){
-        removerItem(p);
-        adicionarItem(p);
+    public void atualizarMapa(ItemMapa i){
+        removerItem(i);
+        adicionarItem(i);
     }
     
-    public Pessoa getItem(int x, int y){
-        return pessoas[x][y];
+    public ItemMapa getItem(int x, int y){
+        return itensDoMapa[x][y];
     }
 
     public int getLargura() {

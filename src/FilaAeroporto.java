@@ -1,10 +1,11 @@
+import java.util.List;
 import java.util.ArrayList;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
-public abstract class FilaAeroporto {
+public abstract class FilaAeroporto implements ItemMapa {
     private int tamanhoFila;
-    private ArrayList<Pessoa> filaDePessoas;
+    private List<Pessoa> filaDePessoas;
     private Localizacao localizacao;
     private Image imagem;
 
@@ -12,17 +13,19 @@ public abstract class FilaAeroporto {
         this.tamanhoFila = tamanhoFila;
         filaDePessoas = new ArrayList<Pessoa>();
         this.localizacao = localizacao;
-        imagem = new ImageIcon(getClass().getResource("Imagens/fila.png")).getImage();
+        imagem = new ImageIcon(getClass().getResource("Imagens/RX/RX1.png")).getImage();
     }
 
     public int getTamanhoFila() {
         return tamanhoFila;
     }
 
-    public Localizacao getLocalizcao() {
+    @Override
+    public Localizacao getLocalizacaoAtual() {
         return localizacao;
     }
 
+    @Override
     public Image getImagem() {
         return imagem;
     }
@@ -31,8 +34,13 @@ public abstract class FilaAeroporto {
         filaDePessoas.add(novaPessoa);
     }
 
-    public Pessoa removerPessoa(Pessoa excluirPessoa) {
-        filaDePessoas.remove(excluirPessoa);
-        return excluirPessoa;
+    public Pessoa removerPessoa() {
+        if (filaDePessoas.isEmpty()) {
+            return null;
+        } else {
+            return filaDePessoas.remove(0);
+        }
     }
+
+    abstract public Pessoa executarAcao();
 }

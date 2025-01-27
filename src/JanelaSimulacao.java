@@ -33,9 +33,9 @@ public class JanelaSimulacao extends JFrame implements KeyListener {
         for (int i = 0; i < mapa.getAltura(); i++) {
             for (int j = 0; j < mapa.getLargura(); j++) {
                 if (mapa.getItem(i, j) != null) {// Se existir algum objeto na posicao (i,j)
-                    Pessoa pessoa = mapa.getItem(i, j);
-                    Localizacao localizacao = pessoa.getLocalizacaoAtual();
-                    visaoMapa.desenharImagem(localizacao.getX(), localizacao.getY(), pessoa.getImagem());
+                    ItemMapa item = mapa.getItem(i, j);
+                    Localizacao localizacao = item.getLocalizacaoAtual();
+                    visaoMapa.desenharImagem(localizacao.getX(), localizacao.getY(), item.getImagem());
                 }
             }
         }

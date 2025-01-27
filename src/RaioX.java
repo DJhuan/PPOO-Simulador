@@ -2,24 +2,26 @@ public class RaioX extends FilaAeroporto {
     private Pessoa avaliadoAtual;
     private int timerAvaliacao;
 
-    public RaioX(int tamanhoFila, Localizacao localizacao, int timerAvaliacao) {
+    public RaioX(int tamanhoFila, Localizacao localizacao) {
         super(tamanhoFila, localizacao);
-        this.timerAvaliacao = timerAvaliacao;
+        this.timerAvaliacao = 0;
     }
 
-    public void setAvaliadoAtual(Pessoa avaliadoAtual) {
-        this.avaliadoAtual = avaliadoAtual;
-    }
+    public Pessoa executarAcao(){
+        if (timerAvaliacao == 0 && avaliadoAtual != null){
+            Pessoa avaliadoConcluido = avaliadoAtual;
+            avaliadoAtual = null;
+            return avaliadoConcluido;
+        }
+        else if (avaliadoAtual != null) {
+            timerAvaliacao--;
+        } else if (avaliadoAtual == null) {
+            avaliadoAtual = super.removerPessoa();
+            if (avaliadoAtual != null) {
+                timerAvaliacao = avaliadoAtual.getPesoBagagem();
+            }
+        }
 
-    public void setTimerAvaliacao(int timerAvaliacao) {
-        this.timerAvaliacao = timerAvaliacao;
-    }
-
-    // public Pessoa concluirAvaliadoAtual() {
-
-    // }
-
-    public void continuarAvaliacao() {
-        
+        return null;
     }
 }

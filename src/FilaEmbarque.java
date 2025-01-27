@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 public class FilaEmbarque extends FilaAeroporto {
     private boolean embarqueDisponivel;
@@ -12,14 +11,16 @@ public class FilaEmbarque extends FilaAeroporto {
         this.embarqueDisponivel = embarqueDisponivel;
     }
 
-    public void executarAcao(){
+    public Pessoa executarAcao(){
         if(embarqueDisponivel){
-            super.removerPessoa();
+            return super.removerPessoa();
         }
         
         if(super.getTamanhoFila() == 0) {
             embarqueDisponivel = false;
         }
+
+        return null;
     } 
 
 }
