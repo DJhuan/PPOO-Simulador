@@ -1,4 +1,6 @@
 import java.awt.Image;
+import java.util.Random;
+
 import javax.swing.ImageIcon;
 
 /**
@@ -6,6 +8,8 @@ import javax.swing.ImageIcon;
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
  */
 public class Pessoa {
+    private static Random rand = new Random(96587);
+
     private Localizacao localizacaoAtual;
     private Localizacao localizacaoDestino;
     private Image imagem;
@@ -14,7 +18,11 @@ public class Pessoa {
     public Pessoa(Localizacao localizacao) {
         this.localizacaoAtual = localizacao;
         localizacaoDestino = null;
-        imagem = new ImageIcon(getClass().getResource("Imagens/veiculo.png")).getImage();
+
+        String caminho = "Imagens/Pessoas/Pessoa" + (rand.nextInt(6) + 1) + ".png";
+        imagem = new ImageIcon(getClass().getResource(caminho)).getImage();
+
+        int pesoBagagem = rand.nextInt(10) + 1;
     }
 
     public Localizacao getLocalizacaoAtual() {
