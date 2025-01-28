@@ -127,7 +127,12 @@ public class Simulacao {
             }
 
             mapa.adicionarItem(f);
-        }
+            if (f instanceof FilaEmbarque) {
+                Localizacao locAviao = new Localizacao(f.getLocalizacaoAtual().getX() + 1, f.getLocalizacaoAtual().getY() - 1);
+                Aviao aviao = new Aviao(locAviao);
+                mapa.adicionarItem(aviao);
+            }
+    }
 
         janelaSimulacao.executarAcao();
     }
