@@ -5,7 +5,7 @@
 public class Principal {
 
     public static void main(String[] args) {
-        Simulacao sim = new Simulacao(5, 0);
+        Simulacao sim = new Simulacao(5, 3);
         while (true){
             sim.executarSimulacao(1);
         }
