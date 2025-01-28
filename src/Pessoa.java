@@ -24,7 +24,7 @@ public class Pessoa implements ItemMapa{
         String caminho = "Imagens/Pessoas/Pessoa" + (rand.nextInt(6) + 1) + ".png";
         imagem = new ImageIcon(getClass().getResource(caminho)).getImage();
 
-        pesoBagagem = rand.nextInt(10) + 1;
+        pesoBagagem = 10 + rand.nextInt(10);
     }
 
     public int getFilaDestino() {

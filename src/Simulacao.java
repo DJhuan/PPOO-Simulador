@@ -53,8 +53,10 @@ public class Simulacao {
 
         // Posicionamento automático das filas de raio-x
         for (int i = 0; i < nroRaiosx; i++) {
-            filas.put(i, new RaioX(i, new Localizacao(5 * i, 10)));
+            filas.put(i, new RaioX(i, new Localizacao(5 * i, 15)));
         }
+
+        // TODO - Posicionamento automático das filas de embarque
 
     }
 
@@ -62,7 +64,7 @@ public class Simulacao {
         janelaSimulacao.executarAcao();
         for (int passo = 0; passo < numPassos; passo++) {
             executarUmPasso();
-            esperar(100);
+            esperar(300);
         }
     }
 
@@ -87,7 +89,7 @@ public class Simulacao {
 
             if (p.alcancouDestino()) {
                 // Este IF é temporário, pois ainda não adicionamos o embarque
-                if (p.getFilaDestino() == 0) {
+                if (p.getFilaDestino() == -1) {
                     itPessoas.remove();
                 } else {
                     filas.get(p.getFilaDestino()).adicionarPessoa(p);
@@ -106,9 +108,9 @@ public class Simulacao {
 
             if (p != null) {
                 Localizacao saidaDaFila = f.getLocalizacaoAtual();
-                // TODO - Definir o novo destino dinamicamente através dos embarques
                 Localizacao novoDestino = new Localizacao(saidaDaFila.getX(), saidaDaFila.getY() - 11);
-                p.setFilaDestino(0);
+                // TODO - Definir o novo destino dinamicamente através dos embarques
+                p.setFilaDestino(-1);
                 p.setLocalizacaoDestino(novoDestino);
 
                 pessoas.add(p);
