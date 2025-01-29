@@ -40,21 +40,27 @@ public class FilaEmbarque extends FilaAeroporto {
      */
     @Override
     public Pessoa executarAcao() {
+        // Embarque não disponível, ninguém sai da fila
         if(!embarqueDisponivel){
             return null;
         }
 
+        // Embarque disponível, ainda estamos embarcando, removemos a pessoa atual
         if(tempoDeEmbarque > 0){
             tempoDeEmbarque--;
             return pessoaAtual;
         }
 
+        // Embarque disponível, acabou o tempo de embarque
+        // Verificamos se ainda restam pessoas a embarcar
+        // Caso haja, então dizemos que não se pode mais embarcar
         Pessoa p = super.removerPessoa();
         if(p == null) {
             embarqueDisponivel = false;
             return null;
         }
 
+        // Caso não haja, então a embarcamos e definimos o próximo tempo de embarque
         pessoaAtual = p;
         tempoDeEmbarque = rand.nextInt(100) + 1;
         return pessoaAtual;
