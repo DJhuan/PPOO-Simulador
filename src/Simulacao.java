@@ -52,7 +52,7 @@ public class Simulacao {
      */
     public Simulacao() {
         mapa = new Mapa();
-        janelaSimulacao = new JanelaSimulacao(mapa, this);
+        janelaSimulacao = new JanelaSimulacao(mapa);
         rand = new Random(98147);
         pessoas = new Vector<Pessoa>();
         nroRaiosx = NRO_EMBARQUES;
@@ -74,6 +74,10 @@ public class Simulacao {
         for (int i = 0; i < nroEmbarques; i++) {
             filas.put(nroRaiosx + i, new FilaEmbarque(new Localizacao(distanciaBorda + espacamento * i, POSY_EMBARQUES)));
             avioes[i] = new Aviao(new Localizacao(distanciaBorda + espacamento * i + 1 , 1), POSY_EMBARQUES);
+        }
+
+        for (int i=0; i < 10; i++){
+            adicionarPessoa();
         }
 
     }
@@ -134,10 +138,10 @@ public class Simulacao {
                     // Remover pessoa da simulação
                     p.setFilaDestino(-1);
                 }
-
+                
                 pessoas.add(p);
             }
-
+            
             mapa.adicionarItem(f);
         }
 
@@ -171,5 +175,4 @@ public class Simulacao {
             System.out.println(e.getMessage());
         }
     }
-
 }

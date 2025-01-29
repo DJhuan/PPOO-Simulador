@@ -20,10 +20,6 @@ public abstract class FilaAeroporto implements ItemMapa {
         imagem = new ImageIcon(getClass().getResource(caminhoImagem)).getImage();
     }
 
-    public int numeroPessoas() {
-        return filaDePessoas.size();
-    }
-
     @Override
     public Localizacao getLocalizacaoAtual() {
         return localizacao;

@@ -1,26 +1,21 @@
 import java.awt.*;
 import javax.swing.*;
-import java.awt.event.KeyListener;
-import java.awt.event.KeyEvent;
 
 /**
  * Fornece a visualizacao da simulacao
  * 
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
  */
-public class JanelaSimulacao extends JFrame implements KeyListener {
+public class JanelaSimulacao extends JFrame {
     private Mapa mapa;
     private VisaoMapa visaoMapa;
-    private Simulacao simulacao;
 
-    public JanelaSimulacao(Mapa mapa, Simulacao simulacao) {
+    public JanelaSimulacao(Mapa mapa) {
         this.mapa = mapa;
-        this.simulacao = simulacao;
         visaoMapa = new VisaoMapa(mapa.getLargura(), mapa.getAltura());
         getContentPane().add(visaoMapa);
         setTitle("Simulator");
         setSize(700, 700);
-        addKeyListener(this);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
@@ -40,21 +35,6 @@ public class JanelaSimulacao extends JFrame implements KeyListener {
             }
         }
         visaoMapa.repaint();
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_P) {
-            simulacao.adicionarPessoa();
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
     }
 
     /**
@@ -120,7 +100,7 @@ public class JanelaSimulacao extends JFrame implements KeyListener {
          */
         public void desenharImagem(int x, int y, Image image) {
             g.drawImage(image, x * xScale + 1, y * yScale + 1,
-                    xScale - 1, yScale - 1, this);
+                    xScale +10, yScale + 10, this);
         }
 
         /**
