@@ -44,20 +44,28 @@ public class FilaEmbarque extends FilaAeroporto {
     public Pessoa executarAcao() {
 
         if (embarqueDisponivel){
+            // Se o embarque estiver disponível, remove uma pessoa da fila
             Pessoa p = super.removerPessoa();
 
+            // Decrementa o tempo de embarque
             tempoParaEmbarcar--;
 
+            // Se o tempo de embarque acabou, o embarque não está mais disponível
+            // Define um tempo de voo para que o avião não retorne imediatamente
             if (tempoParaEmbarcar <= 0){
                 embarqueDisponivel = false;
                 tempoDeVoo = rand.nextInt(30) + 51;
             }
 
+            // Retorna a pessoa que saiu da fila (ou null se nenhuma pessoa saiu)
             return p;
 
         } else {
+            // Se o embarque não estiver disponível, decrementa o tempo de voo
             tempoDeVoo--;
 
+            // Se o tempo de voo acabou, o embarque está disponível
+            // Define o tempo que o avião irá esperar para embarcar
             if (tempoDeVoo <= 0){
                 embarqueDisponivel = true;
                 tempoParaEmbarcar = rand.nextInt(30) + 51;
