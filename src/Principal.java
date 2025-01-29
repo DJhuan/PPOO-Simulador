@@ -1,5 +1,5 @@
 /**
- *
+ * Classe que instancia e inicia a simulação
  * @author Luiz Merschmann
  */
 public class Principal {
