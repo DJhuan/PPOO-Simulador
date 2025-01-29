@@ -13,6 +13,13 @@ import java.util.Iterator;
  */
 
 public class Simulacao {
+    private static final int NRO_EMBARQUES = 4;
+    private static final int NRO_RAIOSX = 7;
+
+    private static final int POSY_EMBARQUES = 4;
+    private static final int POSY_RAIOSX = 15;
+
+
     /**
      * Guarda todas as filas de raio-x e embarque.
      * A chave é utilizada para identificar a fila, usada para
@@ -43,27 +50,30 @@ public class Simulacao {
      * @param raiosx    Número de raios-x na simulação.
      * @param embarque  Número de embarques na simulação.
      */
-    public Simulacao(int raiosx, int embarque) {
+    public Simulacao() {
         mapa = new Mapa();
         janelaSimulacao = new JanelaSimulacao(mapa, this);
         rand = new Random(98147);
         pessoas = new Vector<Pessoa>();
-        nroRaiosx = raiosx;
-        nroEmbarques = embarque;
+        nroRaiosx = NRO_EMBARQUES;
+        nroEmbarques = NRO_RAIOSX;
         filas = new HashMap<Integer, FilaAeroporto>();
         avioes = new Aviao [nroEmbarques];
 
 
         // Posicionamento automático das filas de raio-x
+        int espacamento = mapa.getLargura() / nroRaiosx;
+        int distanciaBorda = espacamento / 2;
         for (int i = 0; i < nroRaiosx; i++) {
-            filas.put(i, new RaioX(i, new Localizacao(5 * i, 15)));
+            filas.put(i, new RaioX(i, new Localizacao(distanciaBorda + espacamento * i, POSY_RAIOSX)));
         }
 
-        // TODO - Posicionamento automático das filas de embarque
         // Posicionamento automático das filas de embarque
+        espacamento = mapa.getLargura() / nroEmbarques;
+        distanciaBorda = espacamento / 2;
         for (int i = 0; i < nroEmbarques; i++) {
-            filas.put(nroRaiosx + i, new FilaEmbarque(i, new Localizacao(5 * i, 5)));
-            avioes[i] = new Aviao(new Localizacao(5 * i + 1 , 1), 5);
+            filas.put(nroRaiosx + i, new FilaEmbarque(i, new Localizacao(distanciaBorda + espacamento * i, POSY_EMBARQUES)));
+            avioes[i] = new Aviao(new Localizacao(distanciaBorda + espacamento * i + 1 , POSY_EMBARQUES-1), POSY_EMBARQUES);
         }
 
     }
@@ -113,12 +123,7 @@ public class Simulacao {
         for (FilaAeroporto f : filas.values()) {
             mapa.removerItem(f);
             p = f.executarAcao();
-            if (f instanceof FilaEmbarque) {
-
-                System.out.println(f.getFilaDePessoas().size());
-            }
             if (p != null) {
-                Localizacao saidaDaFila = f.getLocalizacaoAtual();
                 if (f instanceof RaioX) {
                     // Definir o novo destino dinamicamente através dos embarques
                     int filaEmbarqueId = nroRaiosx + rand.nextInt(nroEmbarques);
@@ -135,7 +140,6 @@ public class Simulacao {
 
             mapa.adicionarItem(f);
         }
-        System.out.println("LIMITE DE FILAS =======================");
 
         for (int i = 0; i < nroEmbarques; i++) {
             mapa.removerItem(avioes[i]);

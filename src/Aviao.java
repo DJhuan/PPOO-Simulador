@@ -8,7 +8,7 @@ public class Aviao implements ItemMapa {
 
     public Aviao(Localizacao localizacao, int limiteInferior) {
         this.localizacao = localizacao;
-        this.imagem = new ImageIcon(getClass().getResource("Imagens/RX/RX1.png")).getImage();
+        this.imagem = new ImageIcon(getClass().getResource("Imagens/Aviao.png")).getImage();
         this.limiteInferior = limiteInferior;
     }
 
@@ -45,13 +45,11 @@ public class Aviao implements ItemMapa {
                 return;
             }
             subirAviao();
-            System.out.println("Subindo avião");
             return;
         }
 
         if(localizacao.getY() < limiteInferior) {
             descerAviao();
-            System.out.println("Descendo avião");
         } 
     }
 }

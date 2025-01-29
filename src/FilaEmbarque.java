@@ -14,7 +14,7 @@ public class FilaEmbarque extends FilaAeroporto {
      */
     public FilaEmbarque(int tamanhoFila, Localizacao localizacao) {
         super(tamanhoFila, localizacao, "Imagens/Embarque/FilaEmbarque.png");
-        this.embarqueDisponivel = true;
+        this.embarqueDisponivel = false;
         this.rand = new Random();
         this.tempoDeEmbarque = rand.nextInt(10) + 1; // Temporizador inicial aleatório entre 1 e 10
     }
@@ -59,14 +59,6 @@ public class FilaEmbarque extends FilaAeroporto {
         pessoaAtual = p;
         tempoDeEmbarque = rand.nextInt(100) + 1;
         return pessoaAtual;
-        
-        // // Decrementa o temporizador e verifica se o embarque deve ficar disponível
-        // if (tempoDeEmbarque > 0) {
-        //     tempoDeEmbarque--;
-        // } else {
-        //     setEmbarqueDisponivel(true);
-        //     tempoDeEmbarque = rand.nextInt(10) + 1; // Reinicia o temporizador aleatório
-        // }
     }
 }
 

@@ -9,7 +9,7 @@ public class RaioX extends FilaAeroporto {
      * @param localizacao Localização da fila no mapa.
      */
     public RaioX(int tamanhoFila, Localizacao localizacao) {
-        super(tamanhoFila, localizacao, "Imagens/RX/RX1.png");
+        super(tamanhoFila, localizacao, "Imagens/RaioX.png");
         this.timerAvaliacao = 0;
     }
 
