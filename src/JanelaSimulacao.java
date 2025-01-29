@@ -73,6 +73,7 @@ public class JanelaSimulacao extends JFrame implements KeyListener {
         private Dimension tamanho;
         private Graphics g;
         private Image imagemMapa;
+        private Image background;
 
         /**
          * Cria um novo componente VisaoMapa.
@@ -82,6 +83,7 @@ public class JanelaSimulacao extends JFrame implements KeyListener {
             alturaMapa = altura;
             setBackground(Color.white);
             tamanho = new Dimension(0, 0);
+            background = new ImageIcon(getClass().getResource("Imagens/BKG.png")).getImage();
         }
 
         /**
@@ -111,15 +113,7 @@ public class JanelaSimulacao extends JFrame implements KeyListener {
                     yScale = VIEW_SCALING_FACTOR;
                 }
             }
-            g.setColor(Color.white);
-            g.fillRect(0, 0, tamanho.width, tamanho.height);
-            g.setColor(Color.gray);
-            for (int i = 0, x = 0; x < tamanho.width; i++, x = i * xScale) {
-                g.drawLine(x, 0, x, tamanho.height - 1);
-            }
-            for (int i = 0, y = 0; y < tamanho.height; i++, y = i * yScale) {
-                g.drawLine(0, y, tamanho.width - 1, y);
-            }
+            g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
         }
 
         /**
