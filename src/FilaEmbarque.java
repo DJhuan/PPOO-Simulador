@@ -9,11 +9,10 @@ public class FilaEmbarque extends FilaAeroporto {
     /**
      * Construtor para a classe FilaEmbarque.
      * 
-     * @param tamanhoFila Tamanho máximo da fila.
      * @param localizacao Localização da fila no mapa.
      */
-    public FilaEmbarque(int tamanhoFila, Localizacao localizacao) {
-        super(tamanhoFila, localizacao, "Imagens/Embarque/FilaEmbarque.png");
+    public FilaEmbarque(Localizacao localizacao) {
+        super(localizacao, "Imagens/FilaEmbarque.png");
         this.embarqueDisponivel = false;
         this.rand = new Random();
         this.tempoDeEmbarque = rand.nextInt(10) + 1; // Temporizador inicial aleatório entre 1 e 10

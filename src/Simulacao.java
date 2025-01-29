@@ -65,15 +65,15 @@ public class Simulacao {
         int espacamento = mapa.getLargura() / nroRaiosx;
         int distanciaBorda = espacamento / 2;
         for (int i = 0; i < nroRaiosx; i++) {
-            filas.put(i, new RaioX(i, new Localizacao(distanciaBorda + espacamento * i, POSY_RAIOSX)));
+            filas.put(i, new RaioX(new Localizacao(distanciaBorda + espacamento * i, POSY_RAIOSX)));
         }
 
         // Posicionamento automático das filas de embarque
         espacamento = mapa.getLargura() / nroEmbarques;
         distanciaBorda = espacamento / 2;
         for (int i = 0; i < nroEmbarques; i++) {
-            filas.put(nroRaiosx + i, new FilaEmbarque(i, new Localizacao(distanciaBorda + espacamento * i, POSY_EMBARQUES)));
-            avioes[i] = new Aviao(new Localizacao(distanciaBorda + espacamento * i + 1 , POSY_EMBARQUES-1), POSY_EMBARQUES);
+            filas.put(nroRaiosx + i, new FilaEmbarque(new Localizacao(distanciaBorda + espacamento * i, POSY_EMBARQUES)));
+            avioes[i] = new Aviao(new Localizacao(distanciaBorda + espacamento * i + 1 , 1), POSY_EMBARQUES);
         }
 
     }
@@ -99,7 +99,6 @@ public class Simulacao {
     private void executarUmPasso() {
         Iterator<Pessoa> itPessoas = pessoas.iterator();
         Pessoa p = null;
-        
         while (itPessoas.hasNext()) {
             p = itPessoas.next();
             mapa.removerItem(p);
@@ -119,6 +118,7 @@ public class Simulacao {
         }
 
         p = null;
+
 
         for (FilaAeroporto f : filas.values()) {
             mapa.removerItem(f);
@@ -146,6 +146,12 @@ public class Simulacao {
             avioes[i].executarAcao(((FilaEmbarque)filas.get(nroRaiosx + i)).getEmbarqueDisponivel());
             mapa.adicionarItem(avioes[i]);
         }
+
+        // A cada passo, 60% de chance de adicionar uma nova pessoa
+        if (rand.nextDouble() <= 0.10) {
+            adicionarPessoa();
+        }
+
 
         janelaSimulacao.executarAcao();
     }

@@ -4,7 +4,6 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public abstract class FilaAeroporto implements ItemMapa {
-    private int tamanhoFila;
     private List<Pessoa> filaDePessoas;
     private Localizacao localizacao;
     private Image imagem;
@@ -12,23 +11,17 @@ public abstract class FilaAeroporto implements ItemMapa {
     /**
      * Construtor para a classe FilaAeroporto.
      * 
-     * @param tamanhoFila   Tamanho máximo da fila.
      * @param localizacao   Localização da fila no mapa.
      * @param caminhoImagem Caminho da imagem que representa a fila.
      */
-    public FilaAeroporto(int tamanhoFila, Localizacao localizacao, String caminhoImagem) {
-        this.tamanhoFila = tamanhoFila;
+    public FilaAeroporto(Localizacao localizacao, String caminhoImagem) {
         filaDePessoas = new ArrayList<Pessoa>();
         this.localizacao = localizacao;
         imagem = new ImageIcon(getClass().getResource(caminhoImagem)).getImage();
     }
 
-    public int getTamanhoFila() {
-        return tamanhoFila;
-    }
-
-    public List<Pessoa> getFilaDePessoas() {
-        return filaDePessoas;
+    public int numeroPessoas() {
+        return filaDePessoas.size();
     }
 
     @Override

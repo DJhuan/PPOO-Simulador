@@ -5,11 +5,10 @@ public class RaioX extends FilaAeroporto {
     /**
      * Construtor para a classe RaioX.
      * 
-     * @param tamanhoFila Tamanho máximo da fila.
      * @param localizacao Localização da fila no mapa.
      */
-    public RaioX(int tamanhoFila, Localizacao localizacao) {
-        super(tamanhoFila, localizacao, "Imagens/RaioX.png");
+    public RaioX(Localizacao localizacao) {
+        super(localizacao, "Imagens/RaioX.png");
         this.timerAvaliacao = 0;
     }
 
@@ -21,7 +20,7 @@ public class RaioX extends FilaAeroporto {
      */
     @Override
     public Pessoa executarAcao(){
-        if (timerAvaliacao == 0 && avaliadoAtual != null){
+        if (timerAvaliacao <= 0 && avaliadoAtual != null){
             // Terminamos de avaliar a pessoa
             Pessoa avaliadoConcluido = avaliadoAtual;
             avaliadoAtual = null;

@@ -19,7 +19,7 @@ public class JanelaSimulacao extends JFrame implements KeyListener {
         visaoMapa = new VisaoMapa(mapa.getLargura(), mapa.getAltura());
         getContentPane().add(visaoMapa);
         setTitle("Simulator");
-        setSize(800, 800);
+        setSize(700, 700);
         addKeyListener(this);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
