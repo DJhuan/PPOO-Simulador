@@ -2,7 +2,8 @@ import java.util.Random;
 
 public class FilaEmbarque extends FilaAeroporto {
     private boolean embarqueDisponivel;
-    private int timerEmbarque;
+    private Pessoa pessoaAtual;
+    private int tempoDeEmbarque;
     private Random rand;
 
     /**
@@ -13,20 +14,25 @@ public class FilaEmbarque extends FilaAeroporto {
      */
     public FilaEmbarque(int tamanhoFila, Localizacao localizacao) {
         super(tamanhoFila, localizacao, "Imagens/Embarque/FilaEmbarque.png");
-        this.embarqueDisponivel = false;
+        this.embarqueDisponivel = true;
         this.rand = new Random();
-        this.timerEmbarque = rand.nextInt(10) + 1; // Temporizador inicial aleatório entre 1 e 10
+        this.tempoDeEmbarque = rand.nextInt(10) + 1; // Temporizador inicial aleatório entre 1 e 10
     }
 
     public void setEmbarqueDisponivel(boolean embarqueDisponivel) {
         this.embarqueDisponivel = embarqueDisponivel;
     }
+    
+    public boolean getEmbarqueDisponivel() {
+        return embarqueDisponivel;
+    }
 
     @Override
     public void adicionarPessoa(Pessoa novaPessoa) {
         super.adicionarPessoa(novaPessoa);
+        embarqueDisponivel = true;
     }
-
+    
     /**
      * Se o embarque estiver disponível, remove uma pessoa da fila.
      * Caso contrário, decrementa o temporizador e verifica se o embarque deve ficar disponível.
@@ -35,23 +41,32 @@ public class FilaEmbarque extends FilaAeroporto {
      */
     @Override
     public Pessoa executarAcao() {
-        if (embarqueDisponivel) {
-            return super.removerPessoa();
+        if(!embarqueDisponivel){
+            return null;
         }
 
-        if (super.getFilaDePessoas().isEmpty()) {
+        if(tempoDeEmbarque > 0){
+            tempoDeEmbarque--;
+            return pessoaAtual;
+        }
+
+        Pessoa p = super.removerPessoa();
+        if(p == null) {
             embarqueDisponivel = false;
+            return null;
         }
 
-        // Decrementa o temporizador e verifica se o embarque deve ficar disponível
-        if (timerEmbarque > 0) {
-            timerEmbarque--;
-        } else {
-            setEmbarqueDisponivel(true);
-            timerEmbarque = rand.nextInt(10) + 1; // Reinicia o temporizador aleatório
-        }
-
-        return null;
+        pessoaAtual = p;
+        tempoDeEmbarque = rand.nextInt(100) + 1;
+        return pessoaAtual;
+        
+        // // Decrementa o temporizador e verifica se o embarque deve ficar disponível
+        // if (tempoDeEmbarque > 0) {
+        //     tempoDeEmbarque--;
+        // } else {
+        //     setEmbarqueDisponivel(true);
+        //     tempoDeEmbarque = rand.nextInt(10) + 1; // Reinicia o temporizador aleatório
+        // }
     }
 }
 

@@ -27,6 +27,7 @@ public class Simulacao {
 
     private int nroRaiosx;
     private int nroEmbarques;
+    private Aviao [] avioes;
 
     /**
      * Janela de simulação que exibe o estado atual da simulação.
@@ -50,6 +51,8 @@ public class Simulacao {
         nroRaiosx = raiosx;
         nroEmbarques = embarque;
         filas = new HashMap<Integer, FilaAeroporto>();
+        avioes = new Aviao [nroEmbarques];
+
 
         // Posicionamento automático das filas de raio-x
         for (int i = 0; i < nroRaiosx; i++) {
@@ -60,6 +63,7 @@ public class Simulacao {
         // Posicionamento automático das filas de embarque
         for (int i = 0; i < nroEmbarques; i++) {
             filas.put(nroRaiosx + i, new FilaEmbarque(i, new Localizacao(5 * i, 5)));
+            avioes[i] = new Aviao(new Localizacao(5 * i + 1 , 1), 5);
         }
 
     }
@@ -68,7 +72,7 @@ public class Simulacao {
         janelaSimulacao.executarAcao();
         for (int passo = 0; passo < numPassos; passo++) {
             executarUmPasso();
-            esperar(300);
+            esperar(100);
         }
     }
 
@@ -109,7 +113,10 @@ public class Simulacao {
         for (FilaAeroporto f : filas.values()) {
             mapa.removerItem(f);
             p = f.executarAcao();
+            if (f instanceof FilaEmbarque) {
 
+                System.out.println(f.getFilaDePessoas().size());
+            }
             if (p != null) {
                 Localizacao saidaDaFila = f.getLocalizacaoAtual();
                 if (f instanceof RaioX) {
@@ -118,7 +125,7 @@ public class Simulacao {
                     Localizacao novoDestino = filas.get(filaEmbarqueId).getLocalizacaoAtual();
                     p.setFilaDestino(filaEmbarqueId);
                     p.setLocalizacaoDestino(novoDestino);
-                } else if (f instanceof FilaEmbarque) {
+                } else {
                     // Remover pessoa da simulação
                     p.setFilaDestino(-1);
                 }
@@ -127,12 +134,14 @@ public class Simulacao {
             }
 
             mapa.adicionarItem(f);
-            if (f instanceof FilaEmbarque) {
-                Localizacao locAviao = new Localizacao(f.getLocalizacaoAtual().getX() + 1, f.getLocalizacaoAtual().getY() - 1);
-                Aviao aviao = new Aviao(locAviao);
-                mapa.adicionarItem(aviao);
-            }
-    }
+        }
+        System.out.println("LIMITE DE FILAS =======================");
+
+        for (int i = 0; i < nroEmbarques; i++) {
+            mapa.removerItem(avioes[i]);
+            avioes[i].executarAcao(((FilaEmbarque)filas.get(nroRaiosx + i)).getEmbarqueDisponivel());
+            mapa.adicionarItem(avioes[i]);
+        }
 
         janelaSimulacao.executarAcao();
     }
