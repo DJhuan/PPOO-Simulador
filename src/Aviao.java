@@ -5,16 +5,26 @@ import javax.swing.ImageIcon;
  * Classe que representa um avião no mapa
  * Essa classe tem como objetivo fornecer uma dica visual do que acontece na fila de embarque
  */
-
 public class Aviao implements ItemMapa {
+    /*
+     * Guarda a localização do avião
+     * O avião desce no mapa relativa a essa posição
+     */
     private Localizacao localizacao;
+
+    /*
+     * Guarda a imagem do avião
+     */
     private Image imagem;
+
+    /*
+     * Guarda o limite inferior que o avião pode descer
+     * normalmente pos Y da fila de embarque que ele representa
+     */
     private int limiteInferior;
 
     /*
-     * Construtor da classe
-     * @param localizacao Localização inicial do avião
-     * @param limiteInferior Limite inferior que o avião pode descer (normalmente pos Y da fila de embarque)
+     * Construtor da classe aviao
      */
     public Aviao(Localizacao localizacao, int limiteInferior) {
         this.localizacao = localizacao;
@@ -22,11 +32,17 @@ public class Aviao implements ItemMapa {
         this.limiteInferior = limiteInferior;
     }
 
+    /*
+     * Retorna a localização atual do avião
+     */
     @Override
     public Localizacao getLocalizacaoAtual() {
         return localizacao;
     }
 
+    /*
+     * Retorna a imagem do avião
+     */
     @Override
     public Image getImagem() {
         return imagem;
