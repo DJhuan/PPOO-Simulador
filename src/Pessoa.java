@@ -3,6 +3,10 @@ import java.util.Random;
 /**
  * Representa os veiculos da simulacao.
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
+ * @author Ana Clara Carvalho Nascimento
+ * @author Isadora Gomes Melo Cunha
+ * @author Jhuan Carlos Sabaini Dassie
+ * @author Wesley Filipe Rocha da Silva
  */
 public class Pessoa extends ItemMapa{
     /**
@@ -38,43 +42,50 @@ public class Pessoa extends ItemMapa{
         pesoBagagem = rand.nextInt(6);
     }
 
-    /*
+    /**
      * Retorna o número da fila de destino
-    */
+     * @return Número da fila de destino
+     */
     public int getFilaDestino() {
         return filaDestino;
     }
 
-    /*
+    /**
      * Modifica a fila de destino de raiox para fila de embarque 
-    */
+     * @param filaDestino Número da fila de destino
+     */
     public void setFilaDestino(int filaDestino) {
         this.filaDestino = filaDestino;
     }
 
-    /*
+    /**
      * Retorna a localização de destino da pessoa
-    */
+     * @return Localização de destino da pessoa
+     */
     public Localizacao getLocalizacaoDestino() {
         return localizacaoDestino;
     }
 
-    /*
+    /**
      * Retorna o peso da bagagem da pessoa
-    */
+     * @return int peso da bagagem da pessoa
+     */
     public int getPesoBagagem() {
         return pesoBagagem;
     }
 
-    /*
+    /**
      * Modifica a localização de destino da pessoa
-    */
+     * @param localizacaoDestino nova Localização de destino da pessoa
+     */
     public void setLocalizacaoDestino(Localizacao localizacaoDestino) {
         this.localizacaoDestino = localizacaoDestino;
     }
-    /*
+
+    /**
      * Modifica o peso da bagagem da pessoa
-    */
+     * @param pesoBagagem Peso da bagagem da pessoa
+     */
     public void setPesoBagagem(int pesoBagagem) {
         this.pesoBagagem = pesoBagagem;
     }

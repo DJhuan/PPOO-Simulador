@@ -92,6 +92,10 @@ public class Simulacao {
 
     }
 
+    /**
+     * Executa a simulação por um número de passos.
+     * @param numPassos vezes que a simulação executará um passo.
+     */
     public void executarSimulacao(int numPassos) {
         janelaSimulacao.executarAcao();
         for (int passo = 0; passo < numPassos; passo++) {
@@ -170,6 +174,12 @@ public class Simulacao {
         janelaSimulacao.executarAcao();
     }
 
+    /**
+     * Adiciona uma pessoa na simulação.
+     * A pessoa é adicionada em uma posição horizontal aleatória, na borda inferior do mapa.
+     * A fila de Raio-X de destino é escolhida aleatoriamente.
+     * A localização de destino é a localização da fila de Raio-X escolhida.
+     */
     public void adicionarPessoa() {
         Pessoa p = new Pessoa(new Localizacao(rand.nextInt(mapa.getLargura()), mapa.getAltura() - 1),
                 rand.nextInt(nroRaiosx));
@@ -178,6 +188,10 @@ public class Simulacao {
         pessoas.add(p);
     }
 
+    /**
+     * Espera um número de milisegundos entre os passos da simulação.
+     * @param milisegundos
+     */
     private void esperar(int milisegundos) {
         try {
             Thread.sleep(milisegundos);

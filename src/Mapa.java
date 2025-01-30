@@ -1,6 +1,10 @@
 /**
  * Representa um mapa com todos os itens que podem ser desenhados em tela
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
+ * @author Ana Clara Carvalho Nascimento
+ * @author Isadora Gomes Melo Cunha
+ * @author Jhuan Carlos Sabaini Dassie
+ * @author Wesley Filipe Rocha da Silva
  */
 public class Mapa {
     private ItemMapa[][] itensDoMapa;

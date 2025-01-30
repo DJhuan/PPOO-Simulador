@@ -3,6 +3,10 @@ import java.util.Random;
 /**
  * Representa uma localização no mapa
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
+ * @author Ana Clara Carvalho Nascimento
+ * @author Isadora Gomes Melo Cunha
+ * @author Jhuan Carlos Sabaini Dassie
+ * @author Wesley Filipe Rocha da Silva
  */
 public class Localizacao {
     private int x;

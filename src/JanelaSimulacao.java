@@ -5,8 +5,15 @@ import javax.swing.*;
  * Fornece a visualizacao da simulacao
  * 
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
+ * @author Ana Clara Carvalho Nascimento
+ * @author Isadora Gomes Melo Cunha
+ * @author Jhuan Carlos Sabaini Dassie
+ * @author Wesley Filipe Rocha da Silva
  */
 public class JanelaSimulacao extends JFrame {
+    /**
+     * O mapa a ser exibido em tela
+     */
     private Mapa mapa;
     private VisaoMapa visaoMapa;
 
