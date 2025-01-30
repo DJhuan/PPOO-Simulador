@@ -28,27 +28,53 @@ public class Mapa {
         this(LARGURA_PADRAO, ALTURA_PADRAO);
     }
     
+    /**
+     * Adiciona um item ao mapa
+     * @param i Item a ser adicionado
+     */
     public void adicionarItem(ItemMapa i){
         itensDoMapa[i.getLocalizacaoAtual().getX()][i.getLocalizacaoAtual().getY()] = i;
     }
     
+    /**
+     * Remove um item do mapa
+     * @param i Item a ser removido
+     */
     public void removerItem(ItemMapa i){
         itensDoMapa[i.getLocalizacaoAtual().getX()][i.getLocalizacaoAtual().getY()] = null;
     }
     
+    /**
+     * Atualiza a posicao de um item no mapa
+     * @param i Item a ser atualizado
+     */
     public void atualizarMapa(ItemMapa i){
         removerItem(i);
         adicionarItem(i);
     }
     
+    /**
+     * Retorna o item da posicao (x, y) do mapa
+     * @param x Coordenada x
+     * @param y Coordenada y
+     * @return Item na posicao (x, y)
+     */
     public ItemMapa getItem(int x, int y){
         return itensDoMapa[x][y];
     }
 
+    /**
+     * Retorna a largura do mapa
+     * @return int largura do mapa 
+     */
     public int getLargura() {
         return largura;
     }
 
+    /**
+     * Retorna a altura do mapa
+     * @return int largura do mapa 
+     */
     public int getAltura() {
         return altura;
     }

@@ -1,5 +1,21 @@
+/**
+ * Classe que representa a fila de raio-x do aeroporto.
+ * Avalia as pessoas da fila, removendo-as após a avaliação.
+ * Quanto maior o peso da bagagem da pessoa, mais tempo ela leva para ser avaliada.
+ * @author Ana Clara Carvalho Nascimento
+ * @author Isadora Gomes Melo Cunha
+ * @author Jhuan Carlos Sabaini Dassie
+ * @author Wesley Filipe Rocha da Silva
+ */
 public class RaioX extends FilaAeroporto {
+    /**
+     * Guarda a pessoa que está sendo avaliada no momento.
+     */
     private Pessoa avaliadoAtual;
+
+    /**
+     * Guarda o tempo restante para a avaliação da pessoa atual.
+     */
     private int timerAvaliacao;
 
     /**

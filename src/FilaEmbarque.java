@@ -43,15 +43,17 @@ public class FilaEmbarque extends FilaAeroporto {
         tempoDeVoo = 5 + rand.nextInt(10); // Temporizador inicial aleatório entre 5 e 14
     }
 
-    /*
+    /**
      * Define se o embarque está disponível ou não
+     * @param embarqueDisponivel boolean que define disponibilidade do embarque
      */
     public void setEmbarqueDisponivel(boolean embarqueDisponivel) {
         this.embarqueDisponivel = embarqueDisponivel;
     }
 
-    /*
+    /**
      * Retorna se o embarque está disponível ou não
+     * @return boolean de disponibilidade do embarque
      */
     public boolean getEmbarqueDisponivel() {
         return embarqueDisponivel;

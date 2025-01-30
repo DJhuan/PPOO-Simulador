@@ -1,22 +1,25 @@
 import java.util.List;
 import java.util.ArrayList;
-import java.awt.Image;
-import javax.swing.ImageIcon;
 
-public abstract class FilaAeroporto implements ItemMapa {
+/**
+ * Classe abstrata que representa uma fila no aeroporto.
+ * Possui apenas o básico para coordenar uma fila de pessoas.
+ * 
+ * @author Ana Clara Carvalho Nascimento
+ * @author Isadora Gomes Melo Cunha
+ * @author Jhuan Carlos Sabaini Dassie
+ * @author Wesley Filipe Rocha da Silva
+ * 
+ * @see ItemMapa
+ * @see FilaEmbarque
+ * @see RaioX
+ */
+public abstract class FilaAeroporto extends ItemMapa {
 
     /*
      * Lista de pessoas em uma fila.
      */
     private List<Pessoa> filaDePessoas;
-    /*
-     * Localização da fila no mapa.
-     */
-    private Localizacao localizacao;
-    /*
-     * Imagem representativa da fila no mapa.
-     */
-    private Image imagem;
 
     /**
      * Construtor para a classe FilaAeroporto.
@@ -25,25 +28,8 @@ public abstract class FilaAeroporto implements ItemMapa {
      * @param caminhoImagem Caminho da imagem que representa a fila.
      */
     public FilaAeroporto(Localizacao localizacao, String caminhoImagem) {
+        super(localizacao, caminhoImagem);
         filaDePessoas = new ArrayList<Pessoa>();
-        this.localizacao = localizacao;
-        imagem = new ImageIcon(getClass().getResource(caminhoImagem)).getImage();
-    }
-
-    /*
-     * Retorna a localização da fila.
-     */
-    @Override
-    public Localizacao getLocalizacaoAtual() {
-        return localizacao;
-    }
-
-    /*
-     * Retorna a imagem representativa da fila.
-     */ 
-    @Override
-    public Image getImagem() {
-        return imagem;
     }
 
     /**
