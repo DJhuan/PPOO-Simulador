@@ -4,8 +4,18 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public abstract class FilaAeroporto implements ItemMapa {
+
+    /*
+     * Lista de pessoas em uma fila.
+     */
     private List<Pessoa> filaDePessoas;
+    /*
+     * Localização da fila no mapa.
+     */
     private Localizacao localizacao;
+    /*
+     * Imagem representativa da fila no mapa.
+     */
     private Image imagem;
 
     /**
@@ -20,11 +30,17 @@ public abstract class FilaAeroporto implements ItemMapa {
         imagem = new ImageIcon(getClass().getResource(caminhoImagem)).getImage();
     }
 
+    /*
+     * Retorna a localização da fila.
+     */
     @Override
     public Localizacao getLocalizacaoAtual() {
         return localizacao;
     }
 
+    /*
+     * Retorna a imagem representativa da fila.
+     */ 
     @Override
     public Image getImagem() {
         return imagem;
