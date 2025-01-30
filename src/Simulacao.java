@@ -8,8 +8,10 @@ import java.util.Iterator;
  * Gerencia o mapa e as filas de raio-x e embarque.
  * 
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
+ * @author Ana Clara Carvalho Nascimento
+ * @author Isadora Gomes Melo Cunha
  * @author Jhuan Carlos Sabaini Dassie
- * 
+ * @author Wesley Filipe Rocha da Silva
  */
 
 public class Simulacao {
@@ -32,8 +34,19 @@ public class Simulacao {
      */
     private Vector<Pessoa> pessoas;
 
+    /**
+     * Guarda o número de filas de raio-x.
+     */
     private int nroRaiosx;
+
+    /**
+     * Guarda o número de filas de embarque.
+     */
     private int nroEmbarques;
+
+    /**
+     * Guarda todos os aviões que estão na simulação.
+     */
     private Aviao [] avioes;
 
     /**
@@ -46,9 +59,6 @@ public class Simulacao {
 
     /**
      * Construtor para a classe Simulação.
-     * 
-     * @param raiosx    Número de raios-x na simulação.
-     * @param embarque  Número de embarques na simulação.
      */
     public Simulacao() {
         mapa = new Mapa();

@@ -1,9 +1,32 @@
 import java.util.Random;
 
+/**
+ * Classe que representa uma fila de embarque no mapa
+ * @author Ana Clara Carvalho Nascimento
+ * @author Isadora Gomes Melo Cunha
+ * @author Jhuan Carlos Sabaini Dassie
+ * @author Wesley Filipe Rocha da Silva
+ */
+
 public class FilaEmbarque extends FilaAeroporto {
+    /**
+     * gerador de números aleatórios
+     */
+    public static Random rand;
+
+    /**
+     * Guarda se o embarque está disponível para as pessoas da fila
+     */
     private boolean embarqueDisponivel;
+
+    /**
+     * Guarda o tempo que o embarque ficará disponível
+     */
     private int tempoParaEmbarcar;
-    private Random rand;
+
+    /**
+     * Guarda o tempo que a fila aguardará antes do próximo embarque
+     */
     private int tempoDeVoo;
 
     /**
@@ -17,23 +40,23 @@ public class FilaEmbarque extends FilaAeroporto {
         rand = new Random();
 
         tempoParaEmbarcar = 0;
-        tempoDeVoo = 5 + rand.nextInt(10); // Temporizador inicial aleatório entre 1 e 10
+        tempoDeVoo = 5 + rand.nextInt(10); // Temporizador inicial aleatório entre 5 e 14
     }
 
+    /*
+     * Define se o embarque está disponível ou não
+     */
     public void setEmbarqueDisponivel(boolean embarqueDisponivel) {
         this.embarqueDisponivel = embarqueDisponivel;
     }
-    
+
+    /*
+     * Retorna se o embarque está disponível ou não
+     */
     public boolean getEmbarqueDisponivel() {
         return embarqueDisponivel;
     }
 
-    @Override
-    public void adicionarPessoa(Pessoa novaPessoa) {
-        super.adicionarPessoa(novaPessoa);
-        embarqueDisponivel = true;
-    }
-    
     /**
      * Se o embarque estiver disponível, remove uma pessoa da fila.
      * Caso contrário, decrementa o temporizador e verifica se o embarque deve ficar disponível.
